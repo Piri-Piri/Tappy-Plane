@@ -28,7 +28,7 @@ class GameScene: SKScene {
         /* Called when a touch begins */
         
         for touch: AnyObject in touches {
-            
+           self.player.setRandomColor()
         }
     }
    

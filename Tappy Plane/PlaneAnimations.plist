@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Blue</key>
+	<array>
+		<string>planeBlue1@2x</string>
+		<string>planeBlue2@2x</string>
+		<string>planeBlue3@2x</string>
+	</array>
+	<key>Green</key>
+	<array>
+		<string>planeGreen1@2x</string>
+		<string>planeGreen2@2x</string>
+		<string>planeGreen3@2x</string>
+	</array>
+	<key>Red</key>
+	<array>
+		<string>planeRed1@2x</string>
+		<string>planeRed2@2x</string>
+		<string>planeRed3@2x</string>
+	</array>
+	<key>Yellow</key>
+	<array>
+		<string>planeYellow1@2x</string>
+		<string>planeYellow2@2x</string>
+		<string>planeYellow3@2x</string>
+	</array>
+</dict>
+</plist>
