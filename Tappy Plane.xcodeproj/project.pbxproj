@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6348AE3B19EDAAC300A95BB9 /* PlaneAnimations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6348AE3A19EDAAC300A95BB9 /* PlaneAnimations.plist */; };
+		6348AE4019EEFE4A00A95BB9 /* PlanePuffTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6348AE3E19EEFE4A00A95BB9 /* PlanePuffTrail.sks */; };
 		63B2308919EC80CC00CA75DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2308819EC80CC00CA75DE /* AppDelegate.swift */; };
 		63B2308B19EC80CC00CA75DE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63B2308A19EC80CC00CA75DE /* GameScene.sks */; };
 		63B2308D19EC80CC00CA75DE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2308C19EC80CC00CA75DE /* GameScene.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		6348AE3A19EDAAC300A95BB9 /* PlaneAnimations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlaneAnimations.plist; sourceTree = "<group>"; };
+		6348AE3E19EEFE4A00A95BB9 /* PlanePuffTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlanePuffTrail.sks; sourceTree = "<group>"; };
 		63B2308319EC80CC00CA75DE /* Tappy Plane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tappy Plane.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B2308719EC80CC00CA75DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63B2308819EC80CC00CA75DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 			name = Ressources;
 			sourceTree = "<group>";
 		};
+		6348AE3D19EEFE1F00A95BB9 /* Particle Effects */ = {
+			isa = PBXGroup;
+			children = (
+				6348AE3E19EEFE4A00A95BB9 /* PlanePuffTrail.sks */,
+			);
+			name = "Particle Effects";
+			sourceTree = "<group>";
+		};
 		63B2307A19EC80CC00CA75DE = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +105,9 @@
 		63B2308519EC80CC00CA75DE /* Tappy Plane */ = {
 			isa = PBXGroup;
 			children = (
+				63F0A96F19ED38DD00DE35B9 /* Planes.atlas */,
+				6348AE3C19EDABFE00A95BB9 /* Ressources */,
+				6348AE3D19EEFE1F00A95BB9 /* Particle Effects */,
 				63B2308819EC80CC00CA75DE /* AppDelegate.swift */,
 				63F0A97119ED3A3D00DE35B9 /* Plane.swift */,
 				63B2308A19EC80CC00CA75DE /* GameScene.sks */,
@@ -111,8 +124,6 @@
 		63B2308619EC80CC00CA75DE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6348AE3C19EDABFE00A95BB9 /* Ressources */,
-				63F0A96F19ED38DD00DE35B9 /* Planes.atlas */,
 				63B2308719EC80CC00CA75DE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -220,6 +231,7 @@
 				6348AE3B19EDAAC300A95BB9 /* PlaneAnimations.plist in Resources */,
 				63B2308B19EC80CC00CA75DE /* GameScene.sks in Resources */,
 				63F0A97019ED38DD00DE35B9 /* Planes.atlas in Resources */,
+				6348AE4019EEFE4A00A95BB9 /* PlanePuffTrail.sks in Resources */,
 				63B2309219EC80CC00CA75DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
