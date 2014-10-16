@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6348AE3B19EDAAC300A95BB9 /* PlaneAnimations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6348AE3A19EDAAC300A95BB9 /* PlaneAnimations.plist */; };
 		6348AE4019EEFE4A00A95BB9 /* PlanePuffTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6348AE3E19EEFE4A00A95BB9 /* PlanePuffTrail.sks */; };
+		634CB81D19EFD98900652D13 /* ScrollingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634CB81C19EFD98900652D13 /* ScrollingNode.swift */; };
+		634CB81F19EFDB8100652D13 /* ScrollingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */; };
 		63B2308919EC80CC00CA75DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2308819EC80CC00CA75DE /* AppDelegate.swift */; };
 		63B2308B19EC80CC00CA75DE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63B2308A19EC80CC00CA75DE /* GameScene.sks */; };
 		63B2308D19EC80CC00CA75DE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2308C19EC80CC00CA75DE /* GameScene.swift */; };
@@ -34,6 +36,8 @@
 /* Begin PBXFileReference section */
 		6348AE3A19EDAAC300A95BB9 /* PlaneAnimations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlaneAnimations.plist; sourceTree = "<group>"; };
 		6348AE3E19EEFE4A00A95BB9 /* PlanePuffTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlanePuffTrail.sks; sourceTree = "<group>"; };
+		634CB81C19EFD98900652D13 /* ScrollingNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingNode.swift; sourceTree = "<group>"; };
+		634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingLayer.swift; sourceTree = "<group>"; };
 		63B2308319EC80CC00CA75DE /* Tappy Plane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tappy Plane.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B2308719EC80CC00CA75DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63B2308819EC80CC00CA75DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 				6348AE3D19EEFE1F00A95BB9 /* Particle Effects */,
 				63B2308819EC80CC00CA75DE /* AppDelegate.swift */,
 				63F0A97119ED3A3D00DE35B9 /* Plane.swift */,
+				634CB81C19EFD98900652D13 /* ScrollingNode.swift */,
+				634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */,
 				63B2308A19EC80CC00CA75DE /* GameScene.sks */,
 				63B2308C19EC80CC00CA75DE /* GameScene.swift */,
 				63B2308E19EC80CC00CA75DE /* GameViewController.swift */,
@@ -251,9 +257,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				63B2308D19EC80CC00CA75DE /* GameScene.swift in Sources */,
+				634CB81D19EFD98900652D13 /* ScrollingNode.swift in Sources */,
 				63B2308F19EC80CC00CA75DE /* GameViewController.swift in Sources */,
 				63F0A97219ED3A3D00DE35B9 /* Plane.swift in Sources */,
 				63B2308919EC80CC00CA75DE /* AppDelegate.swift in Sources */,
+				634CB81F19EFDB8100652D13 /* ScrollingLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
