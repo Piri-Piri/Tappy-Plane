@@ -9,6 +9,12 @@
 import UIKit
 import SpriteKit
 
+enum Alignment: Int {
+    case BitmapFontAlignmentLeft = 0
+    case BitmapFontAlignmentCenter
+    case BitmapFontAlignmentRight
+}
+
 class BitmapFontLabel: SKNode {
    
     var fontName: String = "" {
@@ -20,7 +26,9 @@ class BitmapFontLabel: SKNode {
     }
     var text: NSString = "" {
         didSet {
-            updateText()
+            if text != oldValue {
+                updateText()
+            }
         }
     }
     var letterSpacing:CGFloat = 0.0 {
@@ -30,6 +38,14 @@ class BitmapFontLabel: SKNode {
             }
         }
     }
+    var alignment: Alignment = .BitmapFontAlignmentCenter {
+        didSet {
+            if alignment != oldValue {
+                updateText()
+            }
+        }
+    }
+    
     
     convenience init(text: String, fontName: String) {
         self.init()
@@ -37,6 +53,8 @@ class BitmapFontLabel: SKNode {
         self.text = text
         self.fontName = fontName
         self.letterSpacing = 2.0
+        self.alignment = .BitmapFontAlignmentCenter
+        self.updateText()
     }
     
     func updateText(){
@@ -83,8 +101,21 @@ class BitmapFontLabel: SKNode {
             totalSize.width -= self.letterSpacing
         }
     
-        // Center text
-        var adjustment = CGPointMake(-totalSize.width * 0.5, -totalSize.height * 0.5)
+        // Align text
+        var adjustment: CGPoint
+        
+        switch alignment {
+        case .BitmapFontAlignmentLeft:
+            adjustment = CGPointMake(0.0, -totalSize.height * 0.5)
+        case .BitmapFontAlignmentCenter:
+            adjustment = CGPointMake(-totalSize.width * 0.5, -totalSize.height * 0.5)
+        case .BitmapFontAlignmentRight:
+            adjustment = CGPointMake(-totalSize.width, -totalSize.height * 0.5)
+        default:
+            println("Error: Invalid alignment type!")
+        }
+        
+        
         for letter in self.children {
             (letter as SKNode).position = CGPointMake(letter.position.x + adjustment.x, letter.position.y + adjustment.y)
         }
