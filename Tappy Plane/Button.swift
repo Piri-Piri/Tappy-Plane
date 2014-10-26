@@ -14,16 +14,24 @@ class Button: SKSpriteNode {
     private var fullSizeFrame: CGRect = CGRectNull
     
     var pressedScale: CGFloat = 0.0
+    var pressedAction: (() -> ())!
     
     override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         
         self.pressedScale = 0.9
         self.userInteractionEnabled = true
+        
+        /* ensure that button is on top (spritekit/ios8 bug?) */
+        self.zPosition = 1.0
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setPressedAction(action: () -> ()) {
+        self.pressedAction = action
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -49,7 +57,7 @@ class Button: SKSpriteNode {
         for touch: AnyObject in touches {
             if CGRectContainsPoint(self.fullSizeFrame, touch.locationInNode(self.parent)) {
                 // Pressed button
-                
+                pressedAction()
             }
         }
     }
