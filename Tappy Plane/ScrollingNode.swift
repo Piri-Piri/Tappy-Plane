@@ -11,7 +11,7 @@ import SpriteKit
 
 class ScrollingNode: SKNode {
    
-    let horizontalScrollSpeed: CGFloat = 0.0 // distance to scroll per second
+    var horizontalScrollSpeed: CGFloat = 0.0 // distance to scroll per second
     var isScrolling: Bool = false
  
     func updateWithTimeElpased(timeElpased: NSTimeInterval) {
