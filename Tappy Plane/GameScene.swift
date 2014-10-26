@@ -21,6 +21,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     var foreground:ScrollingLayer!
     var scoreLabel:BitmapFontLabel!
     
+    var gameOverMenu: GameOverMenu!
+    
     var score:Int = 0 {
         didSet {
             scoreLabel.text = "\(score)"
@@ -80,19 +82,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         self.addChild(scoreLabel)
         
         // Setup Test Button
-        var button = Button(texture: graphics.textureNamed("buttonPlay"), color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0), size: graphics.textureNamed("buttonPlay").size())
-        button.position = CGPointMake(view.frame.size.width * 0.5, view.frame.size.height * 0.5)
-        button.zPosition = 1.0
-
-        self.addChild(button)
+        //        let button = Button(texture: graphics.textureNamed("buttonPlay"), color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0), size: graphics.textureNamed("buttonPlay").size())
+        //        button.position = CGPointMake(view.frame.size.width * 0.5, view.frame.size.height * 0.5)
+        //        button.setPressedAction(onButtonPressed)
+        //        self.addChild(button)
+        
+        // Setup Test Menu
+        gameOverMenu = GameOverMenu(size: view.frame.size)
+        self.addChild(gameOverMenu)
         
         // Start a new game
         newGame()
     }
     
+    func onButtonPressed() {
+        // ...
+    }
+    
     func generateGroundTile() -> SKSpriteNode {
-        let graphics = SKTextureAtlas(named: "Graphics")
-        let sprite = SKSpriteNode(texture: graphics.textureNamed("groundGrass"))
+        let altas = SKTextureAtlas(named: "Graphics")
+        let sprite = SKSpriteNode(texture: altas.textureNamed("groundGrass"))
         sprite.anchorPoint = CGPointZero;
         
         let offsetX = sprite.frame.size.width * sprite.anchorPoint.x;
