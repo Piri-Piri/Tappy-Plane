@@ -8,7 +8,13 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
+enum GameState: Int {
+    case GameReady = 0
+    case GameRunning
+    case GameOver
+}
+
+class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOverMenuDelegate {
     
     let kMinFPS = 10.0 / 60.0
     
@@ -22,6 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     var scoreLabel:BitmapFontLabel!
     
     var gameOverMenu: GameOverMenu!
+    var gameState: GameState = .GameReady
     
     var score:Int = 0 {
         didSet {
@@ -81,22 +88,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         scoreLabel.position = CGPointMake(view.frame.size.width * 0.5, view.frame.size.height - 100)
         self.addChild(scoreLabel)
         
-        // Setup Test Button
-        //        let button = Button(texture: graphics.textureNamed("buttonPlay"), color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0), size: graphics.textureNamed("buttonPlay").size())
-        //        button.position = CGPointMake(view.frame.size.width * 0.5, view.frame.size.height * 0.5)
-        //        button.setPressedAction(onButtonPressed)
-        //        self.addChild(button)
-        
-        // Setup Test Menu
+        // Setup game over menu
         gameOverMenu = GameOverMenu(size: view.frame.size)
-        self.addChild(gameOverMenu)
+        gameOverMenu.delegate = self
         
         // Start a new game
         newGame()
-    }
-    
-    func onButtonPressed() {
-        // ...
     }
     
     func generateGroundTile() -> SKSpriteNode {
@@ -149,31 +146,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         
         // Reset score
         score = 0
+        scoreLabel.alpha = 1.0
         
         // Reset plane
         player.position = CGPointMake(self.frame.size.width * 0.3, self.frame.size.height * 0.5)
         player.physicsBody?.affectedByGravity = false
         player.reset()
+        
+        // Set game state to ready
+        gameState = .GameReady
+    }
+    
+    func pressedStartNewGameButton() {
+        newGame()
+        gameOverMenu.removeFromParent()
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
+        if gameState == .GameReady {
+            player.physicsBody?.affectedByGravity = true
+            obstacles.isScrolling = true
+            gameState = .GameRunning
+        }
         
-        for touch: AnyObject in touches {
-            if player.isCrashed {
-                // Reset game
-                newGame()
-            }
-            else {
-                player.physicsBody?.affectedByGravity = true
-                player.isAccelerating = true
-                obstacles.isScrolling = true
-            }
+        if gameState == .GameRunning {
+            player.isAccelerating = true
         }
     }
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        for touch: AnyObject in touches {
+        if gameState == .GameRunning {
             player.isAccelerating = false
         }
     }
@@ -188,7 +191,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         lastCallTime = currentTime
         
         player.update()
-        if !player.isCrashed {
+        
+        if gameState == .GameRunning && player.isCrashed {
+            // Player just crashed in last frame so trigger game over
+            gameState = .GameOver
+            // Fade out score display
+            scoreLabel.runAction(SKAction.fadeOutWithDuration(0.4))
+            // Show game over menu
+            self.addChild(gameOverMenu)
+            gameOverMenu.show()
+        }
+        
+        if gameState != .GameOver {
             background.updateWithTimeElpased(timeElapsed)
             obstacles.updateWithTimeElpased(timeElapsed)
             foreground.updateWithTimeElpased(timeElapsed)

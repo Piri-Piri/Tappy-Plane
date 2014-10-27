@@ -16,10 +16,18 @@ enum MedalType: Int {
     case MedalGold
 }
 
+protocol GameOverMenuDelegate {
+
+    func pressedStartNewGameButton()
+    
+}
+
 class GameOverMenu: SKNode {
     
     private var medalDisplay: SKSpriteNode!
 
+    var delegate: GameOverMenuDelegate!
+    
     var size: CGSize = CGSizeZero
     var score: Int = 0 {
         didSet {
@@ -47,6 +55,9 @@ class GameOverMenu: SKNode {
     }
     var scoreText: BitmapFontLabel!
     var bestScoreText: BitmapFontLabel!
+    var gameOverTitle: SKSpriteNode!
+    var panelGroup: SKNode!
+    var playButton: Button!
     
     
     convenience init(size: CGSize) {
@@ -56,8 +67,14 @@ class GameOverMenu: SKNode {
         // Get texture atlas
         let altas = SKTextureAtlas(named: "Graphics")
         
+        // Setup game over title
+        gameOverTitle = SKSpriteNode(texture: altas.textureNamed("textGameOver"))
+        gameOverTitle.position = CGPointMake(size.width * 0.5, size.height - 70.0)
+        self.addChild(gameOverTitle)
+
         // Setup node to act as group for panel elements
-        let panelGroup = SKNode()
+        panelGroup = SKNode()
+        panelGroup.alpha = 0.0
         self.addChild(panelGroup)
 
         // Setup background panel
@@ -108,6 +125,36 @@ class GameOverMenu: SKNode {
         medalDisplay.anchorPoint = CGPointMake(0.5, 1.0)
         medalDisplay.position = CGPointMake(CGRectGetMidX(medalTitle.frame), CGRectGetMinY(medalTitle.frame) - 15.0)
         panelGroup.addChild(medalDisplay)
+        
+        // Setup Test Button
+        playButton = Button(texture: altas.textureNamed("buttonPlay"), color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0), size: altas.textureNamed("buttonPlay").size())
+        playButton.position = CGPointMake(CGRectGetMidX(panelBackground.frame) , CGRectGetMinY(panelBackground.frame) - 25.0)
+        playButton.setPressedAction(pressedPlayButton)
+        self.addChild(playButton)
     }
     
+    func pressedPlayButton() {
+        delegate.pressedStartNewGameButton()
+    }
+    
+    func show() {
+        // Animate game over title
+        let dropGameOverText = SKAction.moveByX(0.0, y:-100.0, duration:0.5)
+        dropGameOverText.timingMode = SKActionTimingMode.EaseOut
+        gameOverTitle.position = CGPointMake(gameOverTitle.position.x, gameOverTitle.position.y + 100.0)
+        gameOverTitle.runAction(dropGameOverText)
+        
+        // Animate main menu panle
+        let raisePanel = SKAction.group([SKAction.fadeInWithDuration(0.4), SKAction.moveByX(0.0, y:100.0, duration:0.4)])
+        raisePanel.timingMode = SKActionTimingMode.EaseOut
+        panelGroup.alpha = 0.01 // crashs on 0.0 -> bug!?
+        panelGroup.position = CGPointMake(panelGroup.position.x, panelGroup.position.y - 100.0)
+        panelGroup.runAction(SKAction.sequence([SKAction.waitForDuration(0.7), raisePanel]))
+        
+        // Animate play button
+        let fadeInPlayButton = SKAction.sequence([SKAction.waitForDuration(1.2), SKAction.fadeInWithDuration(0.4)])
+        playButton.alpha = 0.0
+        playButton.userInteractionEnabled = false
+        playButton.runAction(SKAction.sequence([fadeInPlayButton, SKAction.runBlock( { self.playButton.userInteractionEnabled = true } )]))
+    }
 }
