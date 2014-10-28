@@ -17,6 +17,7 @@ enum GameState: Int {
 class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOverMenuDelegate {
     
     let kMinFPS = 10.0 / 60.0
+    let kBestScoreKey = "BestScore"
     
     var lastCallTime: CFTimeInterval = 0
     
@@ -35,6 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
             scoreLabel.text = "\(score)"
         }
     }
+    var bestScore: Int = 0
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -87,6 +89,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         scoreLabel = BitmapFontLabel(text: "0", fontName: "number")
         scoreLabel.position = CGPointMake(view.frame.size.width * 0.5, view.frame.size.height - 100)
         self.addChild(scoreLabel)
+        
+        // Load best score
+        bestScore = NSUserDefaults.standardUserDefaults().integerForKey(kBestScoreKey)
         
         // Setup game over menu
         gameOverMenu = GameOverMenu(size: view.frame.size)
@@ -157,9 +162,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         gameState = .GameReady
     }
     
+    func gameOver() {
+        // Update game state
+        gameState = .GameOver
+        // Fade out score display
+        scoreLabel.runAction(SKAction.fadeOutWithDuration(0.4))
+        // Set properties on game over menu
+        gameOverMenu.score = score
+        gameOverMenu.medal = getMedaForCurrentScore()
+        // Update best score
+        if score > bestScore {
+            bestScore = score
+            NSUserDefaults.standardUserDefaults().setInteger(bestScore, forKey: kBestScoreKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        gameOverMenu.bestScore = bestScore
+        // Show game over menu
+        self.addChild(gameOverMenu)
+        gameOverMenu.show()
+    }
+    
     func pressedStartNewGameButton() {
-        newGame()
-        gameOverMenu.removeFromParent()
+        let blackRect = SKSpriteNode(color: SKColor.blackColor(), size: size)
+        blackRect.anchorPoint = CGPointZero
+        blackRect.alpha = 0.0
+        self.addChild(blackRect)
+        
+        let startNewGame = SKAction.runBlock { () -> Void in
+            self.newGame()
+            self.gameOverMenu.removeFromParent()
+        }
+        
+        let fadeTransition = SKAction.sequence([SKAction.fadeInWithDuration(0.4),
+                                                startNewGame,
+                                                SKAction.fadeOutWithDuration(0.6),
+                                                SKAction.removeFromParent()])
+        blackRect.runAction(fadeTransition)
+    }
+    
+    func bump() {
+        let bump = SKAction.sequence([SKAction.moveBy(CGVectorMake(-5.0, -0.4), duration: 0.1), SKAction.moveTo(CGPointZero, duration: 0.1)])
+        world.runAction(bump)
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -194,12 +237,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         
         if gameState == .GameRunning && player.isCrashed {
             // Player just crashed in last frame so trigger game over
-            gameState = .GameOver
-            // Fade out score display
-            scoreLabel.runAction(SKAction.fadeOutWithDuration(0.4))
-            // Show game over menu
-            self.addChild(gameOverMenu)
-            gameOverMenu.show()
+            bump()
+            gameOver()
         }
         
         if gameState != .GameOver {
@@ -207,6 +246,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
             obstacles.updateWithTimeElpased(timeElapsed)
             foreground.updateWithTimeElpased(timeElapsed)
         }
+    }
+    
+    func getMedaForCurrentScore() -> MedalType {
+        var adjustedScore = score - (bestScore / 5)
+        
+        if adjustedScore >= 45 {
+            return .MedalGold
+        }
+        else if adjustedScore >= 25 {
+            return .MedalSilver
+        }
+        else if adjustedScore >= 10 {
+            return .MedalBronze
+        }
+        return .MedalNone
     }
     
     // MARK: SKPhysicsContactDelegate
