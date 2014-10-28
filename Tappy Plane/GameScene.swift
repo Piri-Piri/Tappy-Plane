@@ -29,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     var scoreLabel:BitmapFontLabel!
     
     var gameOverMenu: GameOverMenu!
+    var getReadyMenu: GetReadyMenu!
     var gameState: GameState = .GameReady
     
     var score:Int = 0 {
@@ -96,6 +97,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         // Setup game over menu
         gameOverMenu = GameOverMenu(size: view.frame.size)
         gameOverMenu.delegate = self
+        
+        // Setup get ready menu
+        getReadyMenu = GetReadyMenu(size: view.frame.size, planePosition: CGPointMake(view.frame.size.width * 0.3, view.frame.size.height * 0.5))
+        getReadyMenu.zPosition = 1.0
+        self.addChild(getReadyMenu)
         
         // Start a new game
         newGame()
@@ -191,6 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         let startNewGame = SKAction.runBlock { () -> Void in
             self.newGame()
             self.gameOverMenu.removeFromParent()
+            self.getReadyMenu.show()
         }
         
         let fadeTransition = SKAction.sequence([SKAction.fadeInWithDuration(0.4),
@@ -208,6 +215,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
         if gameState == .GameReady {
+            getReadyMenu.hide()
             player.physicsBody?.affectedByGravity = true
             obstacles.isScrolling = true
             gameState = .GameRunning

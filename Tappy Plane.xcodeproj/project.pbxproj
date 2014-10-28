@@ -26,6 +26,7 @@
 		63B2309719EC80CC00CA75DE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63B2309519EC80CC00CA75DE /* LaunchScreen.xib */; };
 		63B230A319EC80CC00CA75DE /* Tappy_PlaneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B230A219EC80CC00CA75DE /* Tappy_PlaneTests.swift */; };
 		63C0D40719F31EE800811F1C /* ObstacleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0D40619F31EE800811F1C /* ObstacleLayer.swift */; };
+		63E2F2EC1A000653000B3626 /* GetReadyMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2F2EB1A000653000B3626 /* GetReadyMenu.swift */; };
 		63F0A97019ED38DD00DE35B9 /* Graphics.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 63F0A96F19ED38DD00DE35B9 /* Graphics.atlas */; };
 		63F0A97219ED3A3D00DE35B9 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0A97119ED3A3D00DE35B9 /* Plane.swift */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		63B230A119EC80CC00CA75DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63B230A219EC80CC00CA75DE /* Tappy_PlaneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tappy_PlaneTests.swift; sourceTree = "<group>"; };
 		63C0D40619F31EE800811F1C /* ObstacleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleLayer.swift; sourceTree = "<group>"; };
+		63E2F2EB1A000653000B3626 /* GetReadyMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetReadyMenu.swift; sourceTree = "<group>"; };
 		63F0A96F19ED38DD00DE35B9 /* Graphics.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Graphics.atlas; sourceTree = "<group>"; };
 		63F0A97119ED3A3D00DE35B9 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,9 +136,10 @@
 				634CB81C19EFD98900652D13 /* ScrollingNode.swift */,
 				634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */,
 				63C0D40619F31EE800811F1C /* ObstacleLayer.swift */,
+				63E2F2EB1A000653000B3626 /* GetReadyMenu.swift */,
+				630FCB4219FD8C5100CC98A9 /* GameOverMenu.swift */,
 				630F5C9219F5A0FB002AEDC0 /* BitmapFontLabel.swift */,
 				630FCAD619FBC11E00CC98A9 /* Button.swift */,
-				630FCB4219FD8C5100CC98A9 /* GameOverMenu.swift */,
 				63B2308A19EC80CC00CA75DE /* GameScene.sks */,
 				63B2308C19EC80CC00CA75DE /* GameScene.swift */,
 				63B2308E19EC80CC00CA75DE /* GameViewController.swift */,
@@ -278,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E2F2EC1A000653000B3626 /* GetReadyMenu.swift in Sources */,
 				63B2308D19EC80CC00CA75DE /* GameScene.swift in Sources */,
 				634CB81D19EFD98900652D13 /* ScrollingNode.swift in Sources */,
 				63B2308F19EC80CC00CA75DE /* GameViewController.swift in Sources */,
