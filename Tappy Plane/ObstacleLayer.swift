@@ -11,20 +11,20 @@ import SpriteKit
 
 class ObstacleLayer: ScrollingNode {
    
-    let kMarkerBuffer:CGFloat = 200.0
-    //let kVerticalGap:CGFloat = 90.0
-    let kVerticalGap:CGFloat = 140.0
-    let kSpaceBetweenObstacleSets:CGFloat = 180.0
+    let kMarkerBuffer:CGFloat               = 200.0
+    //let kVerticalGap:CGFloat                = 90.0
+    let kVerticalGap:CGFloat                = 140.0
+    let kSpaceBetweenObstacleSets:CGFloat   = 180.0
     
-    let kCollectableVerticalRange:CGFloat = 200.0
-    let KCollectableClearance: CGFloat = 50.0
+    let kCollectableVerticalRange:CGFloat   = 200.0
+    let KCollectableClearance: CGFloat      = 50.0
     
-    let kMountainUpKey = "mountainUp"
-    let kMountainDownKey = "mountainDown"
+    let kMountainUpKey      = "mountainUp"
+    let kMountainDownKey    = "mountainDown"
     let kCollectableStarKey = "CollectableStar"
     
-    var marker:CGFloat = 0.0
-    var floor:CGFloat = 0.0
+    var marker:CGFloat  = 0.0
+    var floor:CGFloat   = 0.0
     var ceiling:CGFloat = 0.0
     
     var delegate: CollectableDelegate!
@@ -157,6 +157,7 @@ class ObstacleLayer: ScrollingNode {
         else if key == kCollectableStarKey {
             sprite = Collectable(texture: atlas.textureNamed("StarGold"))
             
+            (sprite as Collectable).collectionSound = Sound(named: "Collect.caf")
             (sprite as Collectable).pointValue = 1
             (sprite as Collectable).delegate = self.delegate
             

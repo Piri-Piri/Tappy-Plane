@@ -12,9 +12,11 @@ import SpriteKit
 class Button: SKSpriteNode {
    
     private var fullSizeFrame: CGRect = CGRectNull
+    private var isPressed: Bool = false
     
     var pressedScale: CGFloat = 0.0
     var pressedAction: (() -> ())!
+    var pressedSound: Sound!
     
     override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
@@ -35,25 +37,28 @@ class Button: SKSpriteNode {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        for touch: AnyObject in touches {
-            self.fullSizeFrame = self.frame
-            self.touchesMoved(touches, withEvent: event)
-        }
+        self.fullSizeFrame = self.frame
+        self.touchesMoved(touches, withEvent: event)
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
-            if CGRectContainsPoint(self.fullSizeFrame, touch.locationInNode(self.parent)) {
-                self.setScale(self.pressedScale)
-            }
-            else {
-                self.setScale(1.0)
+            if isPressed != CGRectContainsPoint(self.fullSizeFrame, touch.locationInNode(self.parent)){
+                isPressed = !isPressed
+                if isPressed {
+                    self.setScale(self.pressedScale)
+                    self.pressedSound.play()
+                }
+                else {
+                    self.setScale(1.0)
+                }
             }
         }
     }
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
         self.setScale(1.0)
+        self.isPressed = false
         for touch: AnyObject in touches {
             if CGRectContainsPoint(self.fullSizeFrame, touch.locationInNode(self.parent)) {
                 // Pressed button
@@ -63,9 +68,8 @@ class Button: SKSpriteNode {
     }
     
     override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
-        for touch: AnyObject in touches {
-            self.setScale(1.0)
-        }
+        self.setScale(1.0)
+        self.isPressed = false
     }
     
 }

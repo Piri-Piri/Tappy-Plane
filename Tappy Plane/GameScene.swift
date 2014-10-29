@@ -26,6 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     var background:ScrollingLayer!
     var obstacles:ObstacleLayer!
     var foreground:ScrollingLayer!
+    var weather:WeatherLayer!
     var scoreLabel:BitmapFontLabel!
     
     var gameOverMenu: GameOverMenu!
@@ -41,6 +42,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        
+        // Init audio
+        SoundManager.sharedManager().prepareToPlayWithSound("Crunch.caf")
         
         // Set Background color to sky blue
         self.backgroundColor = SKColor(red: 0.835294118, green: 0.929411765, blue: 0.968627451, alpha: 1.0)
@@ -85,6 +89,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         player = Plane()
         player.physicsBody?.affectedByGravity = false
         world.addChild(player)
+        
+        // Setup weather
+        weather = WeatherLayer(size: view.frame.size)
+        world.addChild(weather)
         
         // Setup score label
         scoreLabel = BitmapFontLabel(text: "0", fontName: "number")
@@ -142,6 +150,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     func newGame() {
         // Randomize tileset
         TilesetTextureProvider.sharedInstance().randomizeTilesets()
+        
+        // Setup weather conditions
+        let tilesetName = TilesetTextureProvider.sharedInstance().currentTilesetName
+        weather.conditions = .WeatherClear
+        
+        println(tilesetName)
+        if tilesetName == kTileSetIce || tilesetName == kTileSetSnow {
+            // 1 in 2 chance for snow on snow and ice tilesets
+            if Int(arc4random_uniform(UInt32(2))) == 0 {
+                weather.conditions = .WeatherSnow
+            }
+        }
+        if tilesetName == kTileSetGrass || tilesetName == kTileSetDirt {
+            // 1 in 3 chance for rain on crass and dirt tilesets
+            if Int(arc4random_uniform(UInt32(3))) == 0 {
+                weather.conditions = .WeatherRain
+            }
+        }
         
         // Reset layers
         foreground.position = CGPointZero
@@ -234,7 +260,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        
         var timeElapsed = currentTime - lastCallTime
         if timeElapsed > kMinFPS {
             timeElapsed = kMinFPS

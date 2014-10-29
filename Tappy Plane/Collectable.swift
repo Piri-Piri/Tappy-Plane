@@ -18,10 +18,11 @@ protocol CollectableDelegate {
 class Collectable: SKSpriteNode {
    
     var delegate: CollectableDelegate!
+    var collectionSound: Sound!
     var pointValue: Int = 0
     
     func collect() {
-        // Collect
+        self.collectionSound.play()
         self.runAction(SKAction.removeFromParent())
         if let delegate = self.delegate {
             self.delegate.wasCollected(self)

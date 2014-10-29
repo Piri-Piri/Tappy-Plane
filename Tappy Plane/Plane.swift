@@ -23,6 +23,8 @@ class Plane: SKSpriteNode {
         didSet {
             isEngineRunning = isEngineRunning && !isCrashed
             if isEngineRunning {
+                self.engineSound.play()
+                self.engineSound.fadeIn(1.0)
                 /* avoid that puff effects is follows the plane (looks not realistic) */
                 self.puffTrailEmitter.targetNode = self.parent
                 
@@ -30,6 +32,7 @@ class Plane: SKSpriteNode {
                 self.puffTrailEmitter.particleBirthRate = puffTrailBirthRate
             }
             else {
+                self.engineSound.fadeOut(0.5)
                 self.actionForKey(kPlanAnimationKey)?.speed = 0.0
                 self.puffTrailEmitter.particleBirthRate = 0.0
             }
@@ -51,6 +54,9 @@ class Plane: SKSpriteNode {
     
     var puffTrailEmitter:SKEmitterNode!
     var puffTrailBirthRate:CGFloat = 0.0
+    
+    var crashedTintAction: SKAction!
+    var engineSound: Sound!
     
     
     
@@ -105,6 +111,15 @@ class Plane: SKSpriteNode {
         // initial value
         puffTrailEmitter.particleBirthRate = 0
         
+        // Setup action to tint plane whenit crashed
+        let tint = SKAction.colorizeWithColor(SKColor.redColor(), colorBlendFactor: 0.8, duration: 0.0)
+        let removeTint = SKAction.colorizeWithColorBlendFactor(0.0, duration: 0.2)
+        crashedTintAction = SKAction.sequence([tint,removeTint])
+        
+        // Setup engine sound
+        engineSound = Sound(named: "Engine.caf")
+        engineSound.looping = true
+        
         setRandomColor()
         
     }
@@ -156,6 +171,7 @@ class Plane: SKSpriteNode {
         }
         if !isCrashed {
             self.zRotation = fmax(fmin(self.physicsBody!.velocity.dy, 400), -400) / 400
+            self.engineSound.volume = Float(0.35 + fmax(fmin(self.physicsBody!.velocity.dy, 300), 0) / 300 * 0.65)
         }
     }
     
@@ -165,6 +181,8 @@ class Plane: SKSpriteNode {
             if body.categoryBitMask == kGroundCategory {
                 // Hit the ground
                 isCrashed = true
+                self.runAction(crashedTintAction)
+                SoundManager.sharedManager().playSound("Crunch.caf")
             }
             if body.categoryBitMask == kCollectableCategory {
                 // Remove the star 

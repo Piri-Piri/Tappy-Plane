@@ -9,10 +9,16 @@
 import UIKit
 import SpriteKit
 
+let kTileSetGrass   = "Grass"
+let kTileSetDirt    = "Dirt"
+let kTileSetIce     = "Ice"
+let kTileSetSnow    = "Snow"
+
 class TilesetTextureProvider {
     
     var tilesets = NSMutableDictionary()
     var currentTileset = NSDictionary()
+    var currentTilesetName: String = ""
     
     class func sharedInstance() -> TilesetTextureProvider {
         struct Provider {
@@ -27,7 +33,6 @@ class TilesetTextureProvider {
     }
     
     func getTextureForKey(key: String) -> SKTexture {
-        //println(currentTileset)
         return currentTileset.objectForKey(key) as SKTexture
     }
     
@@ -35,7 +40,7 @@ class TilesetTextureProvider {
         let tilesetKeys:NSArray = tilesets.allKeys
         let randomKey = tilesetKeys.objectAtIndex(Int(arc4random_uniform(UInt32(tilesetKeys.count)))) as String
         currentTileset = tilesets.objectForKey(randomKey) as NSDictionary
-
+        currentTilesetName = randomKey
     }
     
     func loadTilesets() {

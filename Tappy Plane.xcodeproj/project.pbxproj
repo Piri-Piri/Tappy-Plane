@@ -13,6 +13,16 @@
 		630FCB4319FD8C5100CC98A9 /* GameOverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630FCB4219FD8C5100CC98A9 /* GameOverMenu.swift */; };
 		6348AE3B19EDAAC300A95BB9 /* PlaneAnimations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6348AE3A19EDAAC300A95BB9 /* PlaneAnimations.plist */; };
 		6348AE4019EEFE4A00A95BB9 /* PlanePuffTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6348AE3E19EEFE4A00A95BB9 /* PlanePuffTrail.sks */; };
+		634C26661A0170EE0072B257 /* SoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 634C26651A0170EE0072B257 /* SoundManager.m */; };
+		634C266D1A0172000072B257 /* Click.caf in Resources */ = {isa = PBXBuildFile; fileRef = 634C26681A0172000072B257 /* Click.caf */; };
+		634C266E1A0172000072B257 /* Collect.caf in Resources */ = {isa = PBXBuildFile; fileRef = 634C26691A0172000072B257 /* Collect.caf */; };
+		634C266F1A0172000072B257 /* Crunch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 634C266A1A0172000072B257 /* Crunch.caf */; };
+		634C26701A0172000072B257 /* Engine.caf in Resources */ = {isa = PBXBuildFile; fileRef = 634C266B1A0172000072B257 /* Engine.caf */; };
+		634C26711A0172000072B257 /* Rain.caf in Resources */ = {isa = PBXBuildFile; fileRef = 634C266C1A0172000072B257 /* Rain.caf */; };
+		634C26751A017B420072B257 /* SnowEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 634C26731A017B420072B257 /* SnowEffect.sks */; };
+		634C26761A017B420072B257 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 634C26741A017B420072B257 /* spark.png */; };
+		634C26781A017B5C0072B257 /* RainEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 634C26771A017B5C0072B257 /* RainEffect.sks */; };
+		634C267A1A017D240072B257 /* WeatherLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C26791A017D240072B257 /* WeatherLayer.swift */; };
 		634CB81D19EFD98900652D13 /* ScrollingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634CB81C19EFD98900652D13 /* ScrollingNode.swift */; };
 		634CB81F19EFDB8100652D13 /* ScrollingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */; };
 		6381D11119FAD6FC00018173 /* TilesetGraphics.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6381D11019FAD6FC00018173 /* TilesetGraphics.plist */; };
@@ -48,6 +58,18 @@
 		630FCB4219FD8C5100CC98A9 /* GameOverMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverMenu.swift; sourceTree = "<group>"; };
 		6348AE3A19EDAAC300A95BB9 /* PlaneAnimations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlaneAnimations.plist; sourceTree = "<group>"; };
 		6348AE3E19EEFE4A00A95BB9 /* PlanePuffTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlanePuffTrail.sks; sourceTree = "<group>"; };
+		634C26631A0170ED0072B257 /* Tappy Plane-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tappy Plane-Bridging-Header.h"; sourceTree = "<group>"; };
+		634C26651A0170EE0072B257 /* SoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundManager.m; sourceTree = "<group>"; };
+		634C26681A0172000072B257 /* Click.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Click.caf; sourceTree = "<group>"; };
+		634C26691A0172000072B257 /* Collect.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Collect.caf; sourceTree = "<group>"; };
+		634C266A1A0172000072B257 /* Crunch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Crunch.caf; sourceTree = "<group>"; };
+		634C266B1A0172000072B257 /* Engine.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Engine.caf; sourceTree = "<group>"; };
+		634C266C1A0172000072B257 /* Rain.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rain.caf; sourceTree = "<group>"; };
+		634C26721A01722B0072B257 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
+		634C26731A017B420072B257 /* SnowEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SnowEffect.sks; sourceTree = "<group>"; };
+		634C26741A017B420072B257 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		634C26771A017B5C0072B257 /* RainEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RainEffect.sks; sourceTree = "<group>"; };
+		634C26791A017D240072B257 /* WeatherLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherLayer.swift; sourceTree = "<group>"; };
 		634CB81C19EFD98900652D13 /* ScrollingNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingNode.swift; sourceTree = "<group>"; };
 		634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingLayer.swift; sourceTree = "<group>"; };
 		6381D11019FAD6FC00018173 /* TilesetGraphics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TilesetGraphics.plist; sourceTree = "<group>"; };
@@ -101,8 +123,23 @@
 			isa = PBXGroup;
 			children = (
 				6348AE3E19EEFE4A00A95BB9 /* PlanePuffTrail.sks */,
+				634C26731A017B420072B257 /* SnowEffect.sks */,
+				634C26771A017B5C0072B257 /* RainEffect.sks */,
+				634C26741A017B420072B257 /* spark.png */,
 			);
 			name = "Particle Effects";
+			sourceTree = "<group>";
+		};
+		634C26671A0171E90072B257 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				634C26681A0172000072B257 /* Click.caf */,
+				634C26691A0172000072B257 /* Collect.caf */,
+				634C266A1A0172000072B257 /* Crunch.caf */,
+				634C266B1A0172000072B257 /* Engine.caf */,
+				634C266C1A0172000072B257 /* Rain.caf */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 		63B2307A19EC80CC00CA75DE = {
@@ -126,6 +163,7 @@
 		63B2308519EC80CC00CA75DE /* Tappy Plane */ = {
 			isa = PBXGroup;
 			children = (
+				634C26671A0171E90072B257 /* Sounds */,
 				63F0A96F19ED38DD00DE35B9 /* Graphics.atlas */,
 				6348AE3C19EDABFE00A95BB9 /* Ressources */,
 				6348AE3D19EEFE1F00A95BB9 /* Particle Effects */,
@@ -136,6 +174,7 @@
 				634CB81C19EFD98900652D13 /* ScrollingNode.swift */,
 				634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */,
 				63C0D40619F31EE800811F1C /* ObstacleLayer.swift */,
+				634C26791A017D240072B257 /* WeatherLayer.swift */,
 				63E2F2EB1A000653000B3626 /* GetReadyMenu.swift */,
 				630FCB4219FD8C5100CC98A9 /* GameOverMenu.swift */,
 				630F5C9219F5A0FB002AEDC0 /* BitmapFontLabel.swift */,
@@ -143,6 +182,8 @@
 				63B2308A19EC80CC00CA75DE /* GameScene.sks */,
 				63B2308C19EC80CC00CA75DE /* GameScene.swift */,
 				63B2308E19EC80CC00CA75DE /* GameViewController.swift */,
+				634C26721A01722B0072B257 /* SoundManager.h */,
+				634C26651A0170EE0072B257 /* SoundManager.m */,
 				63B2309019EC80CC00CA75DE /* Main.storyboard */,
 				63B2309319EC80CC00CA75DE /* Images.xcassets */,
 				63B2309519EC80CC00CA75DE /* LaunchScreen.xib */,
@@ -154,6 +195,7 @@
 		63B2308619EC80CC00CA75DE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				634C26631A0170ED0072B257 /* Tappy Plane-Bridging-Header.h */,
 				63B2308719EC80CC00CA75DE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -257,12 +299,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				63B2309719EC80CC00CA75DE /* LaunchScreen.xib in Resources */,
+				634C26751A017B420072B257 /* SnowEffect.sks in Resources */,
+				634C266E1A0172000072B257 /* Collect.caf in Resources */,
 				63B2309419EC80CC00CA75DE /* Images.xcassets in Resources */,
+				634C26781A017B5C0072B257 /* RainEffect.sks in Resources */,
 				6381D11119FAD6FC00018173 /* TilesetGraphics.plist in Resources */,
+				634C26711A0172000072B257 /* Rain.caf in Resources */,
+				634C266F1A0172000072B257 /* Crunch.caf in Resources */,
 				6348AE3B19EDAAC300A95BB9 /* PlaneAnimations.plist in Resources */,
 				63B2308B19EC80CC00CA75DE /* GameScene.sks in Resources */,
 				63F0A97019ED38DD00DE35B9 /* Graphics.atlas in Resources */,
+				634C26761A017B420072B257 /* spark.png in Resources */,
+				634C26701A0172000072B257 /* Engine.caf in Resources */,
 				6348AE4019EEFE4A00A95BB9 /* PlanePuffTrail.sks in Resources */,
+				634C266D1A0172000072B257 /* Click.caf in Resources */,
 				63B2309219EC80CC00CA75DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +335,9 @@
 				63B2308D19EC80CC00CA75DE /* GameScene.swift in Sources */,
 				634CB81D19EFD98900652D13 /* ScrollingNode.swift in Sources */,
 				63B2308F19EC80CC00CA75DE /* GameViewController.swift in Sources */,
+				634C267A1A017D240072B257 /* WeatherLayer.swift in Sources */,
 				6381D11319FAD86100018173 /* TilesetTextureProvider.swift in Sources */,
+				634C26661A0170EE0072B257 /* SoundManager.m in Sources */,
 				630FCB4319FD8C5100CC98A9 /* GameOverMenu.swift in Sources */,
 				63F0A97219ED3A3D00DE35B9 /* Plane.swift in Sources */,
 				63C0D40719F31EE800811F1C /* ObstacleLayer.swift in Sources */,
@@ -416,9 +468,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Tappy Plane/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tappy Plane/Tappy Plane-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -426,9 +481,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Tappy Plane/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tappy Plane/Tappy Plane-Bridging-Header.h";
 			};
 			name = Release;
 		};

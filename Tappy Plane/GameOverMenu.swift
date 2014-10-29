@@ -130,6 +130,7 @@ class GameOverMenu: SKNode {
         playButton = Button(texture: altas.textureNamed("buttonPlay"), color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0), size: altas.textureNamed("buttonPlay").size())
         playButton.position = CGPointMake(CGRectGetMidX(panelBackground.frame) , CGRectGetMinY(panelBackground.frame) - 25.0)
         playButton.setPressedAction(pressedPlayButton)
+        playButton.pressedSound = Sound(named: "Click.caf")
         self.addChild(playButton)
     }
     
