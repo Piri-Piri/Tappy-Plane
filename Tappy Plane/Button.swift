@@ -15,8 +15,8 @@ class Button: SKSpriteNode {
     private var isPressed: Bool = false
     
     var pressedScale: CGFloat = 0.0
-    var pressedAction: (() -> ())!
-    var pressedSound: Sound!
+    var pressedAction: (() -> ())?
+    var pressedSound: Sound?
     
     override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
@@ -47,7 +47,7 @@ class Button: SKSpriteNode {
                 isPressed = !isPressed
                 if isPressed {
                     self.setScale(self.pressedScale)
-                    self.pressedSound.play()
+                    self.pressedSound?.play()
                 }
                 else {
                     self.setScale(1.0)
@@ -62,7 +62,7 @@ class Button: SKSpriteNode {
         for touch: AnyObject in touches {
             if CGRectContainsPoint(self.fullSizeFrame, touch.locationInNode(self.parent)) {
                 // Pressed button
-                pressedAction()
+                pressedAction?()
             }
         }
     }
