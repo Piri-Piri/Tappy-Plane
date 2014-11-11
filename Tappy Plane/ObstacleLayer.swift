@@ -19,15 +19,13 @@ class ObstacleLayer: ScrollingNode {
     let kCollectableVerticalRange:CGFloat   = 200.0
     let KCollectableClearance: CGFloat      = 50.0
     
-    let kMountainUpKey      = "mountainUp"
-    let kMountainDownKey    = "mountainDown"
-    let kCollectableStarKey = "CollectableStar"
-    
     var marker:CGFloat  = 0.0
     var floor:CGFloat   = 0.0
     var ceiling:CGFloat = 0.0
     
+    var gameMode: GameMode!
     var delegate: CollectableDelegate!
+    
     
     override init() {
         super.init()
@@ -71,31 +69,48 @@ class ObstacleLayer: ScrollingNode {
     }
     
     func addObstacleSet() {
-        // Get Mountain nodes
-        let mountainUp = self.getUnusedObjectForKey(kMountainUpKey)
-        let mountainDown = self.getUnusedObjectForKey(kMountainDownKey)
-        
-        // Calculate maximum variation
-        let maxVariation = (mountainUp.size.height + kVerticalGap + mountainDown.size.height) - (ceiling - floor)
-        let yAdjustment = CGFloat(arc4random_uniform(UInt32(maxVariation)))
-        
-        // Position mountain nodes
-        mountainUp.position = CGPointMake(marker, floor + (mountainUp.size.height * 0.5) - yAdjustment)
-        mountainDown.position = CGPointMake(marker, mountainUp.position.y + mountainDown.size.height + kVerticalGap)
-        
-        // Get collectable star node
-        let collectable = self.getUnusedObjectForKey(kCollectableStarKey)
-        
-        // Position collectable
-        let midPoint = mountainUp.position.y + (mountainUp.size.height * 0.5) + (kVerticalGap * 0.5)
-        var yPosition = midPoint + CGFloat(arc4random_uniform(UInt32(kCollectableVerticalRange))) - (kCollectableVerticalRange * 0.5)
-        yPosition = fmax(yPosition, floor + KCollectableClearance)
-        yPosition = fmin(yPosition, ceiling - KCollectableClearance)
-        
-        collectable.position = CGPointMake(marker + (kSpaceBetweenObstacleSets * 0.5), yPosition)
-        
-        // Reposition marker
-        marker += kSpaceBetweenObstacleSets
+        if gameMode == GameMode.Normal {
+            // Get Mountain nodes
+            let mountainUp = self.getUnusedObjectForKey(kMountainUpKey)
+            let mountainDown = self.getUnusedObjectForKey(kMountainDownKey)
+            
+            // Calculate maximum variation
+            let maxVariation = (mountainUp.size.height + kVerticalGap + mountainDown.size.height) - (ceiling - floor)
+            let yAdjustment = CGFloat(arc4random_uniform(UInt32(maxVariation)))
+            
+            // Position mountain nodes
+            mountainUp.position = CGPointMake(marker, floor + (mountainUp.size.height * 0.5) - yAdjustment)
+            mountainDown.position = CGPointMake(marker, mountainUp.position.y + mountainDown.size.height + kVerticalGap)
+            
+            // Get collectable star node
+            let collectable = self.getUnusedObjectForKey(kCollectableStarKey)
+            
+            // Position collectable
+            let midPoint = mountainUp.position.y + (mountainUp.size.height * 0.5) + (kVerticalGap * 0.5)
+            var yPosition = midPoint + CGFloat(arc4random_uniform(UInt32(kCollectableVerticalRange))) - (kCollectableVerticalRange * 0.5)
+            yPosition = fmax(yPosition, floor + KCollectableClearance)
+            yPosition = fmin(yPosition, ceiling - KCollectableClearance)
+            
+            collectable.position = CGPointMake(marker + (kSpaceBetweenObstacleSets * 0.5), yPosition)
+            
+            // Reposition marker
+            marker += kSpaceBetweenObstacleSets
+        }
+        else if gameMode == .Challenge {
+            let challenge = ChallengeProvider.sharedInstance().getRandomChallenge()
+            var furthestItem: CGFloat = 0.0
+            for item in challenge  {
+                let challengeItem = item as ChallengeItem
+                
+                let object: SKSpriteNode = self.getUnusedObjectForKey(challengeItem.obstacleKey)
+                object.position = CGPointMake(challengeItem.position.x + self.marker, challengeItem.position.y)
+                if challengeItem.position.x > furthestItem {
+                    furthestItem = challengeItem.position.x;
+                }
+            }
+            // Reposition marker.
+            self.marker += furthestItem + kSpaceBetweenObstacleSets;
+        }
     }
     
     func getUnusedObjectForKey(key: String) -> SKSpriteNode {
