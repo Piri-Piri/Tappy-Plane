@@ -27,6 +27,8 @@
 		634CB81F19EFDB8100652D13 /* ScrollingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */; };
 		6381D11119FAD6FC00018173 /* TilesetGraphics.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6381D11019FAD6FC00018173 /* TilesetGraphics.plist */; };
 		6381D11319FAD86100018173 /* TilesetTextureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381D11219FAD86100018173 /* TilesetTextureProvider.swift */; };
+		63A0304B1A12A5AC00439D07 /* ChallengeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A0304A1A12A5AC00439D07 /* ChallengeProvider.swift */; };
+		63A0304D1A12A69700439D07 /* SettingsMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A0304C1A12A69700439D07 /* SettingsMenuScene.swift */; };
 		63B2308919EC80CC00CA75DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2308819EC80CC00CA75DE /* AppDelegate.swift */; };
 		63B2308B19EC80CC00CA75DE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63B2308A19EC80CC00CA75DE /* GameScene.sks */; };
 		63B2308D19EC80CC00CA75DE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2308C19EC80CC00CA75DE /* GameScene.swift */; };
@@ -74,6 +76,8 @@
 		634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingLayer.swift; sourceTree = "<group>"; };
 		6381D11019FAD6FC00018173 /* TilesetGraphics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TilesetGraphics.plist; sourceTree = "<group>"; };
 		6381D11219FAD86100018173 /* TilesetTextureProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TilesetTextureProvider.swift; sourceTree = "<group>"; };
+		63A0304A1A12A5AC00439D07 /* ChallengeProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeProvider.swift; sourceTree = "<group>"; };
+		63A0304C1A12A69700439D07 /* SettingsMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuScene.swift; sourceTree = "<group>"; };
 		63B2308319EC80CC00CA75DE /* Tappy Plane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tappy Plane.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B2308719EC80CC00CA75DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63B2308819EC80CC00CA75DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,7 +173,9 @@
 				6348AE3D19EEFE1F00A95BB9 /* Particle Effects */,
 				63B2308819EC80CC00CA75DE /* AppDelegate.swift */,
 				63F0A97119ED3A3D00DE35B9 /* Plane.swift */,
+				63A0304C1A12A69700439D07 /* SettingsMenuScene.swift */,
 				6381D11219FAD86100018173 /* TilesetTextureProvider.swift */,
+				63A0304A1A12A5AC00439D07 /* ChallengeProvider.swift */,
 				630F5C9019F594D3002AEDC0 /* Collectable.swift */,
 				634CB81C19EFD98900652D13 /* ScrollingNode.swift */,
 				634CB81E19EFDB8100652D13 /* ScrollingLayer.swift */,
@@ -331,10 +337,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63A0304B1A12A5AC00439D07 /* ChallengeProvider.swift in Sources */,
 				63E2F2EC1A000653000B3626 /* GetReadyMenu.swift in Sources */,
 				63B2308D19EC80CC00CA75DE /* GameScene.swift in Sources */,
 				634CB81D19EFD98900652D13 /* ScrollingNode.swift in Sources */,
 				63B2308F19EC80CC00CA75DE /* GameViewController.swift in Sources */,
+				63A0304D1A12A69700439D07 /* SettingsMenuScene.swift in Sources */,
 				634C267A1A017D240072B257 /* WeatherLayer.swift in Sources */,
 				6381D11319FAD86100018173 /* TilesetTextureProvider.swift in Sources */,
 				634C26661A0170EE0072B257 /* SoundManager.m in Sources */,
