@@ -8,11 +8,25 @@
 
 import SpriteKit
 
+enum GameMode: Int {
+    case Normal
+    case Challenge
+}
+
+enum ControlMode: Int {
+    case Tap
+    case Flap
+}
+
 enum GameState: Int {
-    case GameReady = 0
+    case GameReady
     case GameRunning
     case GameOver
 }
+
+let kMountainUpKey      = "mountainUp"
+let kMountainDownKey    = "mountainDown"
+let kCollectableStarKey = "CollectableStar"
 
 class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOverMenuDelegate {
     
@@ -29,9 +43,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     var weather:WeatherLayer!
     var scoreLabel:BitmapFontLabel!
     
+    var gameMode: GameMode = .Normal
+    var controlMode: ControlMode = .Tap
+
     var gameOverMenu: GameOverMenu!
     var getReadyMenu: GetReadyMenu!
     var gameState: GameState = .GameReady
+    
+    var settingsMenu: SettingsMenuScene!
     
     var score:Int = 0 {
         didSet {
@@ -53,7 +72,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         let graphics = SKTextureAtlas(named: "Graphics")
         
         // Setup Physics
-        self.physicsWorld.gravity = CGVectorMake(0.0, -5.5)
+        if controlMode == .Tap {
+            self.physicsWorld.gravity = CGVectorMake(0.0, -5.5)
+        }
+        else {
+            self.physicsWorld.gravity = CGVectorMake(0.0, -4.0)
+        }
         self.physicsWorld.contactDelegate = self
         
         // Setup World
@@ -73,6 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         // Setup obstacle layer
         obstacles = ObstacleLayer()
         obstacles.delegate = self
+        obstacles.gameMode = gameMode
         obstacles.horizontalScrollSpeed = -80
         obstacles.isScrolling = true
         obstacles.floor = 0.0
@@ -111,6 +136,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         getReadyMenu.zPosition = 1.0
         self.addChild(getReadyMenu)
         
+        // Setup setting scene
+        settingsMenu = SettingsMenuScene(size: view.frame.size)
+
         // Start a new game
         newGame()
     }
@@ -155,7 +183,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         let tilesetName = TilesetTextureProvider.sharedInstance().currentTilesetName
         weather.conditions = .WeatherClear
         
-        println(tilesetName)
         if tilesetName == kTileSetIce || tilesetName == kTileSetSnow {
             // 1 in 2 chance for snow on snow and ice tilesets
             if Int(arc4random_uniform(UInt32(2))) == 0 {
@@ -248,7 +275,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         }
         
         if gameState == .GameRunning {
-            player.isAccelerating = true
+            if controlMode == .Tap {
+                player.isAccelerating = true
+            }
+            else {
+                player.flap()
+            }
         }
     }
     
