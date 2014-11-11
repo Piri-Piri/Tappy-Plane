@@ -175,6 +175,20 @@ class Plane: SKSpriteNode {
         }
     }
     
+    func flap() {
+        if !isCrashed && self.position.y < kMaxAltitude {
+            if self.physicsBody?.velocity.dy < -200 {
+                self.physicsBody?.velocity = CGVectorMake(0, -200)
+            }
+            
+            self.physicsBody?.applyImpulse(CGVectorMake(0.0, 20.0))
+            
+            if self.physicsBody?.velocity.dy > 300 {
+                self.physicsBody?.velocity = CGVectorMake(0, 300)
+            }
+        }
+    }
+    
     func collideWithBody(body:SKPhysicsBody) {
         // Ignore collisions if already crashed
         if !isCrashed {
