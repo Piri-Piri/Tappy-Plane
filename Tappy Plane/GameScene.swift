@@ -50,7 +50,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     var getReadyMenu: GetReadyMenu!
     var gameState: GameState = .GameReady
     
-    var settingsMenu: SettingsMenuScene!
+    var settingsButton: Button!
+    var settingsMenuScene: SettingsMenuScene!
     
     var score:Int = 0 {
         didSet {
@@ -64,6 +65,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         
         // Init audio
         SoundManager.sharedManager().prepareToPlayWithSound("Crunch.caf")
+        
+        // Load Setting
+        gameMode = GameMode(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("GameMode"))!
+        controlMode = ControlMode(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("ControlMode"))!
         
         // Set Background color to sky blue
         self.backgroundColor = SKColor(red: 0.835294118, green: 0.929411765, blue: 0.968627451, alpha: 1.0)
@@ -136,9 +141,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         getReadyMenu.zPosition = 1.0
         self.addChild(getReadyMenu)
         
-        // Setup setting scene
-        settingsMenu = SettingsMenuScene(size: view.frame.size)
-
+        // Setup settings button
+        let settingsButtonTexture = SKTexture(imageNamed: "settings")
+        settingsButton = Button(texture: settingsButtonTexture, color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0), size: settingsButtonTexture.size())
+        settingsButton.position = CGPointMake(view.frame.size.width - settingsButtonTexture.size().width - 10, self.frame.size.height - 30)
+        settingsButton.setPressedAction(pressedSettingsButton)
+        self.addChild(settingsButton)
+        
+        let gameModeLabel = SKLabelNode(fontNamed: "Futura")
+        let gameModeText = gameMode.rawValue == 0 ? "Normal" : "Challenge"
+        gameModeLabel.text = "Game Mode: \(gameModeText)"
+        gameModeLabel.fontSize = 12.0
+        gameModeLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        gameModeLabel.fontColor = SKColor.lightGrayColor()
+        gameModeLabel.position = CGPointMake(self.frame.size.width - 200, self.frame.size.height - 25)
+        self.addChild(gameModeLabel)
+        
+        let controlModeLabel = SKLabelNode(fontNamed: "Futura")
+        let controlModeText = controlMode.rawValue == 0 ? "Tap" : "Flap"
+        controlModeLabel.text = "Control Mode: \(controlModeText)"
+        controlModeLabel.fontSize = 12.0
+        controlModeLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        controlModeLabel.fontColor = SKColor.lightGrayColor()
+        controlModeLabel.position = CGPointMake(self.frame.size.width - 200, self.frame.size.height - 40)
+        self.addChild(controlModeLabel)
+        
         // Start a new game
         newGame()
     }
@@ -258,6 +285,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
                                                 SKAction.fadeOutWithDuration(0.6),
                                                 SKAction.removeFromParent()])
         blackRect.runAction(fadeTransition)
+    }
+    
+    func pressedSettingsButton() {
+        // Switch to settings menu
+        if let skView = self.view {
+            skView.presentScene(SettingsMenuScene(size: self.size), transition: SKTransition.pushWithDirection(SKTransitionDirection.Left, duration: 0.6))
+        }
     }
     
     func bump() {

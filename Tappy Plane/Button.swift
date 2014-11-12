@@ -17,6 +17,16 @@ class Button: SKSpriteNode {
     var pressedScale: CGFloat = 0.0
     var pressedAction: (() -> ())?
     var pressedSound: Sound?
+    var enabled: Bool = false {
+        didSet {
+            if enabled {
+                self.alpha = 1.0
+            }
+            else {
+                self.alpha = 0.6
+            }
+        }
+    }
     
     override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
