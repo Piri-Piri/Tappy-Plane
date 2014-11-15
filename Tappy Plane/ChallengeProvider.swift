@@ -50,7 +50,7 @@ class ChallengeProvider {
         // Challenge 2
         challenge = NSMutableArray()
         challenge.addObject(ChallengeItem.challengeItemWithKey(kMountainUpKey, andPosition:CGPointMake(90, 25)))
-        challenge.addObject(ChallengeItem.challengeItemWithKey(kMountainDownKey, andPosition:CGPointMake(0, 232)))
+        challenge.addObject(ChallengeItem.challengeItemWithKey(kMountainDownAlternateKey, andPosition:CGPointMake(0, 232)))
         challenge.addObject(ChallengeItem.challengeItemWithKey(kCollectableStarKey, andPosition:CGPointMake(100, 243)))
         challenge.addObject(ChallengeItem.challengeItemWithKey(kCollectableStarKey, andPosition:CGPointMake(152, 205)))
         self.challenges.addObject(challenge)
@@ -58,7 +58,7 @@ class ChallengeProvider {
         // Challenge 3
         challenge = NSMutableArray()
         challenge.addObject(ChallengeItem.challengeItemWithKey(kMountainUpKey, andPosition:CGPointMake(0, 82)))
-        challenge.addObject(ChallengeItem.challengeItemWithKey(kMountainUpKey, andPosition:CGPointMake(122, 0)))
+        challenge.addObject(ChallengeItem.challengeItemWithKey(kMountainUpAlternateKey, andPosition:CGPointMake(122, 0)))
         challenge.addObject(ChallengeItem.challengeItemWithKey(kMountainDownKey, andPosition:CGPointMake(85, 320)))
         challenge.addObject(ChallengeItem.challengeItemWithKey(kCollectableStarKey, andPosition:CGPointMake(10, 213)))
         challenge.addObject(ChallengeItem.challengeItemWithKey(kCollectableStarKey, andPosition:CGPointMake(81, 116)))

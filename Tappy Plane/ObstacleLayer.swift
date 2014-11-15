@@ -40,12 +40,10 @@ class ObstacleLayer: ScrollingNode {
     func reset() {
         // loop through child nodes and reposition for reuse and update texture
         for node in self.children {
-            (node as SKSpriteNode).position = CGPointMake(-1000, 0)
-            if (node as SKSpriteNode).name == kMountainUpKey {
-                (node as SKSpriteNode).texture = TilesetTextureProvider.sharedInstance().getTextureForKey(kMountainUpKey)
-            }
-            if (node as SKSpriteNode).name == kMountainDownKey {
-                (node as SKSpriteNode).texture = TilesetTextureProvider.sharedInstance().getTextureForKey(kMountainDownKey)
+            let skNode = node as SKSpriteNode
+            skNode.position = CGPointMake(-1000, 0)
+            if skNode.name == kMountainUpKey || skNode.name == kMountainUpAlternateKey || skNode.name == kMountainDownKey || skNode.name == kMountainDownAlternateKey {
+                skNode.texture = TilesetTextureProvider.sharedInstance().getTextureForKey(skNode.name!)
             }
         }
         
@@ -135,7 +133,7 @@ class ObstacleLayer: ScrollingNode {
         let atlas = SKTextureAtlas(named: "Graphics")
         
         var sprite:SKSpriteNode!
-        if key == kMountainUpKey {
+        if key == kMountainUpKey || key == kMountainUpAlternateKey {
             //println("Create Mountion Up")
             sprite = SKSpriteNode(texture: TilesetTextureProvider.sharedInstance().getTextureForKey(kMountainUpKey))
             
@@ -152,7 +150,7 @@ class ObstacleLayer: ScrollingNode {
             
             self.addChild(sprite)
         }
-        else if key == kMountainDownKey {
+        else if key == kMountainDownKey || key == kMountainDownAlternateKey {
             // println("Create Mountion Down")
             sprite = SKSpriteNode(texture: TilesetTextureProvider.sharedInstance().getTextureForKey(kMountainDownKey))
             

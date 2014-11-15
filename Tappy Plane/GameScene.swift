@@ -24,9 +24,11 @@ enum GameState: Int {
     case GameOver
 }
 
-let kMountainUpKey      = "mountainUp"
-let kMountainDownKey    = "mountainDown"
-let kCollectableStarKey = "CollectableStar"
+let kMountainUpKey              = "mountainUp"
+let kMountainDownKey            = "mountainDown"
+let kMountainUpAlternateKey     = "mountainUpAlternate"
+let kMountainDownAlternateKey   = "mountainDownAlternate"
+let kCollectableStarKey         = "CollectableStar"
 
 class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOverMenuDelegate {
     
@@ -50,7 +52,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     var getReadyMenu: GetReadyMenu!
     var gameState: GameState = .GameReady
     
-    var settingsButton: Button!
     var settingsMenuScene: SettingsMenuScene!
     
     var score:Int = 0 {
@@ -143,13 +144,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         
         // Setup settings button
         let settingsButtonTexture = SKTexture(imageNamed: "settings")
-        settingsButton = Button(texture: settingsButtonTexture, color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0), size: settingsButtonTexture.size())
+        let settingsButton = Button(texture: settingsButtonTexture, color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0), size: settingsButtonTexture.size())
         settingsButton.position = CGPointMake(view.frame.size.width - settingsButtonTexture.size().width - 10, self.frame.size.height - 30)
         settingsButton.setPressedAction(pressedSettingsButton)
         self.addChild(settingsButton)
         
-        let gameModeLabel = SKLabelNode(fontNamed: "Futura")
         let gameModeText = gameMode.rawValue == 0 ? "Normal" : "Challenge"
+        let gameModeLabel = SKLabelNode(fontNamed: "Futura")
         gameModeLabel.text = "Game Mode: \(gameModeText)"
         gameModeLabel.fontSize = 12.0
         gameModeLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
@@ -157,8 +158,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         gameModeLabel.position = CGPointMake(self.frame.size.width - 200, self.frame.size.height - 25)
         self.addChild(gameModeLabel)
         
-        let controlModeLabel = SKLabelNode(fontNamed: "Futura")
         let controlModeText = controlMode.rawValue == 0 ? "Tap" : "Flap"
+        let controlModeLabel = SKLabelNode(fontNamed: "Futura")
         controlModeLabel.text = "Control Mode: \(controlModeText)"
         controlModeLabel.fontSize = 12.0
         controlModeLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
